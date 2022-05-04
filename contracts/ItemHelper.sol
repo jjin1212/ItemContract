@@ -14,7 +14,7 @@ contract ItemHelper is ItemOwnable {
         emit NewEntryToItemsLedger(desc, date, tokenId, needsRepair);
     }
 
-    function showItemLedgerEntries(uint tokenId) external view returns(LedgerEntry[] memory) {
+    function getItemLedgerEntries(uint tokenId) external view returns(LedgerEntry[] memory) {
         return(itemToLedger[tokenId]);
     }
 }
