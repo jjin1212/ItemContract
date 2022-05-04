@@ -15,6 +15,7 @@ contract ItemFactory is ERC721 {
     struct Item {
         // uint by default is uint256, this int is way too large and we do not need this much.
         // We can optimize here by using uint32, 2^32 should be more than enough to price goods.
+        // Using a smaller-sized uint when possible will allow Solidity to pack these variables together to take up less storage.
         string name;
         string model;
         string itemType;
@@ -49,7 +50,7 @@ contract ItemFactory is ERC721 {
         uint id = items.length - 1;
         itemToLedger[id].push(LedgerEntry("First entry, just minted", false, uint32(_purchaseDate)));
         itemToOwner[id] = msg.sender;
-        
+
         emit NewItem(_name, _model, _itemType, _salePrice, _purchaseDate);
         return id;
     }
